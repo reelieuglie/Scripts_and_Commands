@@ -51,3 +51,17 @@ echo $ami "is not being used"
 volumes=$(aws ec2 describe-volumes query "Volumes[*].{VolumeId:VolumeId,SnapshotId:SnapshotId}" output text region us-east-1)
 echo $volumes
 ```
+* Similarly, the command below does the same thing, just prettier. 
+```
+#!/bin/bash
+
+#Searches through us-east-1 for every volume. Echos the volume ID and the snapshots of said volume.
+volumes=$(aws ec2 describe-volumes --query "Volumes[*].{VolumeId:VolumeId}" --output text --region us-east-1)
+for i in ${volumes[@]};
+do echo $i
+aws ec2 describe-snapshots --snapshot-id $(aws ec2 describe-volumes --volume-id $i  --query "Volumes[*].{SnapshotId:SnapshotId}" --output text --region us-east-1) --region us-east-1
+sleep $[ ( $RANDOM % 4 )  + 1 ]s
+
+# ^ Jitter I guess?
+done
+```
