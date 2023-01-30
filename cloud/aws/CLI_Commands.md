@@ -19,6 +19,7 @@ sudo ./aws/install
   instancetype=p3*; for i in $(aws ec2 describe-regions --region us-east-1  --query "Regions[].RegionName[]" --output text); do aws ec2 describe-instance-type-offerings --location-type availability-zone  --filters Name=instance-type,Values=$instancetype--region $i  --output text | awk '{print $3}' | sort -u; done
 ```
 ### Check if AMIs are in use within Launch Configurations or Templates in an Account
+* This is a bash script. Copy, paste into a file, and then run the file. 
 ```
 #!/bin/bash
 # As with all of my scripts, use at your own risk. Checks if AMIs are in use.
@@ -40,4 +41,13 @@ if " ${images[@]} " = " ${ami} "[[ >> " ${images[@]} "  =  " ${ami} "  ]]; then
 echo $ami "is being used in a launch configuration or template"
 else
 echo $ami "is not being used"
+```
+
+### Find source snapshot IDs for EBS Volumes
+```
+#!/bin/bash
+# Finds source snapshot for volumes
+# If you just want to run this as a one-off, copy the line below from `aws` to `us-east-1` and paste it into the terminal. 
+volumes=$(aws ec2 describe-volumes query "Volumes[*].{VolumeId:VolumeId,SnapshotId:SnapshotId}" output text region us-east-1)
+echo $volumes
 ```
