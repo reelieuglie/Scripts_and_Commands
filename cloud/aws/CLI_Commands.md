@@ -1,5 +1,5 @@
 ### Install AWS CLI
-[[ Stolen shamelessly from here]](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#getting-started-install-instructions)
+[ Stolen shamelessly from here](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#getting-started-install-instructions)
 ```
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"  && \
 sudo yum install -y unzip || sudo apt-get -y install -y unzip || sudo zypper --non-interactive in unzip  && \
@@ -12,9 +12,9 @@ sudo ./aws/install
 ```
 
 ### Find Availability of Instance Types Globally (does not check available capacity, just if it's offered in region)
-* [[Inspiration is here]](https://www.youtube.com/watch?v=6U0h8InsW30)
+* [Inspiration is here](https://www.youtube.com/watch?v=6U0h8InsW30)
 * Replace `p3*` with whatever you are searching for
-* [[Instance Types]](https://instances.vantage.sh/)
+* [Instance Types](https://instances.vantage.sh/)
 ```
   instancetype=p3*; for i in $(aws ec2 describe-regions --region us-east-1  --query "Regions[].RegionName[]" --output text); do aws ec2 describe-instance-type-offerings --location-type availability-zone  --filters Name=instance-type,Values=$instancetype--region $i  --output text | awk '{print $3}' | sort -u; done
 ```
