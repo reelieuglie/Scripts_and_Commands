@@ -65,7 +65,8 @@ sleep $[ ( $RANDOM % 4 )  + 1 ]s
 # ^ Jitter I guess?
 done
 ```
-* Login to ECR
+###  Login to ECR
+* Login to ECR from instance in the same region (assuming IAM profile allows it.)
 ```
 #Check if aws cli exists
 # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#getting-started-install-instructions
