@@ -98,3 +98,8 @@ fi
 # https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html#cli-authenticate-registry
 aws ecr get-login-password --region $region | docker login --username AWS --password-stdin $account.dkr.ecr.$region.amazonaws.com
 ```
+### Find Address Range for Service Endpoint in AWS
+* Default is EC2 Instance Connect
+```
+for i in $(aws ec2 describe-regions --region us-east-2 --query 'Regions[].RegionName' --output text); do REGION=$i; curl -s  https://ip-ranges.amazonaws.com/ip-ranges.json | jq --arg REGION "$REGION" ' .prefixes[]  | select(.region==$REGION) | select(.service=="EC2_INSTANCE_CONNECT")' && sleep 1; done
+```
