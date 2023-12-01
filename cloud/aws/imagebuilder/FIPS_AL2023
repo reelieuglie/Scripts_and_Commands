@@ -1,0 +1,23 @@
+name: Enable FIPS
+description: This is a document to enable FIPS in Amazon Linux 2023
+schemaVersion: 1.0
+
+phases:
+  - name: build
+    steps:
+      - name: Enable_Fips
+        action: ExecuteBash
+        inputs:
+          commands:
+            - sudo dnf -y install crypto-policies crypto-policies-scripts
+            - sudo fips-mode-setup --enable
+      - name: Reboot
+        action: Reboot
+
+  - name: test
+    steps:
+      - name: Verify_FIPS
+        action: ExecuteBash
+        inputs:
+          commands:
+            - sudo fips-mode-setup --check
