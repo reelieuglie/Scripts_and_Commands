@@ -11,3 +11,8 @@ cat $csv_filename| head -n 1 | tr ',' "\n" | cat -n
 ```
  awk -F, '{print $5=strftime("%c",substr($5,1,10))}
 ```
+
+### grep for just `var`; like when searching for variables in a terraform template
+```
+grep -oE '\bvar.*\b'
+```
