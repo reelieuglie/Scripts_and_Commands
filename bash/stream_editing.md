@@ -18,5 +18,5 @@ grep -oE '\bvar.*\b'
 ```
 * This can be combined to search in the variables file for all the variables in `main.tf`
 ```
-for i in $(grep -oE '\bvar.*\b' main.tf | sed 's/var\./\n/g' | sed '/^$/d' | sed 's/[[:punct:]]//g' | sort | uniq); do grep $i ./variables.tf >/dev/null 2>&1 || echo "variable $i not declared in variables file"  ; done
+for i in $(grep -oE '\bvar.*\b' main.tf | sed 's/var\./\n/g' | sed '/^$/d' | sed 's/[\[|\$|\"|\{|\}]//g' | sort | uniq); do grep $i ./variables.tf >/dev/null 2>&1 || echo "variable $i not declared in variables.tf"; done
 ```
