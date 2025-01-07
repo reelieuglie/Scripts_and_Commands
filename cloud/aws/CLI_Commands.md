@@ -103,3 +103,8 @@ aws ecr get-login-password --region $region | docker login --username AWS --pass
 ```
 for i in $(aws ec2 describe-regions --region us-east-2 --query 'Regions[].RegionName' --output text); do REGION=$i; curl -s  https://ip-ranges.amazonaws.com/ip-ranges.json | jq --arg REGION "$REGION" ' .prefixes[]  | select(.region==$REGION) | select(.service=="EC2_INSTANCE_CONNECT")' && sleep 1; done
 ```
+
+### List all IAM Roles that do not contain 'AWS' in the Role Name
+```
+aws iam list-roles  | jq -r '.Roles[] | select(.RoleName | contains("AWS") | not) | .Arn'
+```
