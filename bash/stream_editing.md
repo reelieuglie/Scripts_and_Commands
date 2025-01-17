@@ -20,3 +20,9 @@ grep -oE '\bvar.*\b'
 ```
 for i in $(grep -oE '\bvar.*\b' main.tf | sed 's/var\./\n/g' | sed '/^$/d' | sed 's/[\[|\$|\"|\{|\}]//g' | sort | uniq); do grep $i ./variables.tf >/dev/null 2>&1 || echo "variable $i not declared in variables.tf"; done
 ```
+
+### grep up to a number of alphanumeric characters
+```
+grep -oE 'i-[0-z]{0,17}'
+```
+*Note* That's for instance-ids
