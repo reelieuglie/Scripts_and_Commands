@@ -5,7 +5,7 @@
 #####
 #Check if aws cli exists
 # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#getting-started-install-instructions
-if  ! command -v aws;
+if  ! command -v aws > /dev/null;
 then
 	echo " AWS CLI Not Installed"
 	curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"  && \
