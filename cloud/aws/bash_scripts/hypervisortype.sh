@@ -1,4 +1,8 @@
 #!/bin/bash
+####
+# Checks which instance types are offered in the region and checks the hypervisor type. For if you want to find which Nitro instances are available in a region
+# Instance Type Offerings: https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instance-type-offerings.html
+####
 # This takes a few minutes to run, especially in larger regions. It is not designed for speed. 
 # Start it, make sure it's responding with messages like `m4.xlarge xen` and then grab a coffee, come back in 5. 
 
