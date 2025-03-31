@@ -16,7 +16,7 @@ fi
 # Check if IMDS is being used.
 # https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-metadata-v2-how-it-works.html
 # 
-TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
+TOKEN=`curl -sf -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
 if [ -z $TOKEN ];
 then
 	echo "IMDS does not seem to be present. Please provide region and account ID at prompts"
@@ -25,8 +25,8 @@ then
 	echo "What is your account number?"
 	read account
 else
-	account=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/dynamic/instance-identity/document | grep accountId | cut -d "\"" -f 4)
-	region=$( curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/placement/region)
+	account=$(curl -sf -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/dynamic/instance-identity/document | grep accountId | cut -d "\"" -f 4)
+	region=$( curl -sf -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/placement/region)
 fi
 # Actually Login to ECR
 # https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html#cli-authenticate-registry
