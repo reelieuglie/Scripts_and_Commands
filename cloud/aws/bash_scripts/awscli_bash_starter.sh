@@ -20,9 +20,9 @@ while (( $# > 0 )); do
                 -r|--region) region="$2"; shift;;
                 -p|--profile) profile="$2"; shift;;
                 -h|--help) echo "Use -r for region and -p for profile";
-                        return 1;
+                        return 1;;
                 \?) echo "Unknown Option";
-                        return 2;
+                        return 2;;
                 *) break;;
         esac
         shift
