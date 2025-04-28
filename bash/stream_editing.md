@@ -26,3 +26,9 @@ for i in $(grep -oE '\bvar.*\b' main.tf | sed 's/var\./\n/g' | sed '/^$/d' | sed
 grep -oE 'i-[0-z]{0,17}'
 ```
 *Note* That's for instance-ids
+
+### diff between command outputs
+```
+diff <(command 1) <(command 2)
+```
+
