@@ -3,7 +3,7 @@
 # Automatically login to ECR, because I get tired of changing the account number and region manually. 
 # https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html#cli-authenticate-registry
 #####
-#Check if aws cli exists
+#Check if aws cli exists and install it if it does not
 # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#getting-started-install-instructions
 if  ! command -v aws > /dev/null;
 then
