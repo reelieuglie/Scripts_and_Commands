@@ -8,9 +8,7 @@
 ######
 # Setup CLI Variables
 ######
-cmd="/usr/local/bin/aws"
-region=""
-profile="default"
+cmd="aws"
 
 #####
 # Collect Region and Profile Variables
@@ -27,4 +25,14 @@ while (( $# > 0 )); do
         esac
         shift
 done
+
+if [ ! -z "$profile" ]; then
+	cmd="$cmd --profile $profile"
+fi
+
+if [ ! -z "$region" ]; then
+	cmd="$cmd --region $region"
+fi
+
+
 
